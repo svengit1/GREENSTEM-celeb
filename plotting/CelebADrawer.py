@@ -65,6 +65,11 @@ class BboxDrawer:
                 "width": bbox_data["width"] * new_size[0] / old_size[0],
                 "height": bbox_data["height"] * new_size[1] / old_size[1]}
 
+    def resize_feats(self, feat_data: list, old_size: tuple, new_size: tuple):
+        return [(round(feat_data[i][0] * new_size[0] / old_size[0]),
+                 round(feat_data[i][1] * new_size[1] / old_size[1])) for i in range(0,len(feat_data))]
+
+
 
 ##PRIMJER
 # processor = BboxDrawer(dir_addr="test_images",csv_addr="bbox_mini.csv")

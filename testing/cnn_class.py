@@ -139,3 +139,88 @@ class CNN(nn.Module):
         for f in self.flattening:
             x = f(x)
         return x
+
+
+class CNN_small(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.b1_conv1 = nn.Conv2d(3, 16, kernel_size=(8, 8), padding=6)
+        self.b1_act1 = nn.ReLU()
+        self.b1_drop1 = [nn.Dropout(0.3),nn.Dropout(0.3)]
+
+        self.b1_conv2 = nn.Conv2d(16, 32, kernel_size=(8, 8), padding=6)
+        self.b1_act2 = nn.ReLU()
+        self.b1_pool2 = nn.MaxPool2d(kernel_size=(2, 2))
+
+        self.block_one = [
+            self.b1_conv1,
+            self.b1_act1,
+            self.b1_conv2,
+            self.b1_act2,
+            self.b1_pool2
+        ]
+
+        self.b2_conv1 = nn.Conv2d(32, 64, kernel_size=(3, 3), padding=1)
+        self.b2_act1 = nn.ReLU()
+        self.b2_conv2 = nn.Conv2d(64, 64, kernel_size=(3, 3), padding=1)
+        self.b2_act2 = nn.ReLU()
+        self.b2_pool2 = nn.MaxPool2d(kernel_size=(2,2))
+        self.b2_conv3 = nn.Conv2d(64, 128, kernel_size=(3, 3), padding=1)
+        self.b2_act3 = nn.ReLU()
+        self.b2_conv4 = nn.Conv2d(128, 128, kernel_size=(3, 3), padding=1)
+        self.b2_act4 = nn.ReLU()
+        self.pool3 = nn.AvgPool2d(kernel_size=(2, 2))
+
+        self.block_two = [
+            self.b2_conv1,
+            self.b2_act1,
+            self.b2_conv2,
+            self.b2_act2,
+            self.b2_pool2,
+            self.b2_conv3,
+            self.b2_act3,
+            self.b2_conv4,
+            self.b2_act4,
+            self.pool3
+        ]
+
+        self.flatten = nn.Flatten()
+
+        self.fc1 = nn.Linear(100352, 128)
+        self.fc2 = nn.Linear(128, 128)
+        self.fc3 = nn.Linear(128, 64)
+        self.fc4 = nn.Linear(64, 10)
+
+        self.flattening = [
+            self.flatten,
+            self.fc1,
+            self.fc2,
+            self.fc3,
+            self.fc4
+        ]
+
+        self.block_array = {
+            "block_one": self.block_one,
+            "drop": self.b1_drop1,
+            "block_two": self.block_two,
+            "fc": self.flattening
+        }
+    def to_inline(self,device):
+        for k in self.block_array.keys():
+            for iter in range(len(self.block_array[k])):
+                self.block_array[k][iter] = self.block_array[k][iter].to(device)
+
+
+
+    def forward(self, x,train=True):
+        if train:
+            x = self.b1_drop1[0](x)
+        for f in self.block_one:
+            x= f(x)
+        if train:
+            x = self.b1_drop1[1](x)
+        for f in self.block_two:
+            x= f(x)
+        for f in self.flattening:
+            x = f(x)
+        return x
