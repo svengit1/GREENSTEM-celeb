@@ -2,7 +2,7 @@ import os
 import matplotlib.image as image
 import pandas as pd
 from matplotlib import pyplot as plt
-from PIL import Image
+from PIL import Image,ImageDraw
 
 
 ### INIT DAJES DIR_ADDR: TAMO SU SLIKE i CSV_ADDR: ime/adresa samog csv filea
@@ -20,7 +20,7 @@ class BboxDrawer:
         y = [y_1, y_1, y_1 + h, y_1 + h, y_1]
         return x, y
 
-    def process_img(self, debug=True, base=True, **kwargs):
+    def process_img(self, debug=True, base=True, save=False, **kwargs):
         print(kwargs)
         if not base:
             img = kwargs["image"]
@@ -33,17 +33,21 @@ class BboxDrawer:
             print(bbox_data)
             print(bbox_data.__class__)
         x, y = self.make_box(bbox_data["x_1"], bbox_data["y_1"], bbox_data["width"], bbox_data["height"])
-        plt.plot(x, y, color="black", linewidth=3)
-        plt.imshow(img)
+        draw =ImageDraw.Draw(img)
+        draw.rectangle((x[0],y[0],x[2],y[2]),width=10,outline="green")
+        if save:
+            img.save("processed_bbox.png")
+            return
         plt.show()
 
-    def process_feats(self,img, features:list[tuple]):
-        for l_x,l_y in features:
-            plt.plot(l_x, l_y, color="black", marker="o")
-        plt.imshow(img)
-        plt.show()
+    def process_feats(self, img, features: list[tuple]):
+        draw = ImageDraw.Draw(img)
+        for l_x, l_y in features:
+            draw.polygon((l_x-10,l_y,l_x,l_y+10,l_x+10,l_y,
+                          l_x,l_y-10),fill="blue")
+        img.save("processed_feats.png")
 
-    def process_resize_img(self, image_id, new_size: tuple = (218, 178)):
+    def process_resize_img(self, image_id, new_size: tuple = (218, 178), save=False):
         file = self.all_dirs[image_id]
         bbox_data = self.bbox_datas.iloc[image_id - 1]
         image = Image.open(self.dir_addr + "/" + file)
@@ -56,6 +60,9 @@ class BboxDrawer:
                              bbox_data["height"])
         print(x, y)
         plt.plot(x, y, color="black", linewidth=3)
+        if save:
+            plt.savefig("processed.jpg")
+            return
         plt.imshow(img)
         plt.show()
 
@@ -67,9 +74,11 @@ class BboxDrawer:
 
     def resize_feats(self, feat_data: list, old_size: tuple, new_size: tuple):
         return [(round(feat_data[i][0] * new_size[0] / old_size[0]),
-                 round(feat_data[i][1] * new_size[1] / old_size[1])) for i in range(0,len(feat_data))]
+                 round(feat_data[i][1] * new_size[1] / old_size[1])) for i in range(0, len(feat_data))]
 
-
+    def reshape_feats(self, feat_data: list, bbox_data,img_size):
+        return [(feat_data[i][0] + bbox_data["x_1"],
+                 img_size[1]-(feat_data[i][1]+bbox_data["y_1"])) for i in range(0, len(feat_data))]
 
 ##PRIMJER
 # processor = BboxDrawer(dir_addr="test_images",csv_addr="bbox_mini.csv")
