@@ -1,0 +1,41 @@
+WindowManager:
+    MainWindow:
+    SecondWindow:
+
+<MainWindow>
+    name: "first"
+    MDRelativeLayout:
+        id: RL_ONE
+        MDLabel:
+            text: "Ok, please write your name,assignment will be awarded automatically. \n Progress will be saved"
+            pos_hint: {"x":0.5,"y":0.5}
+        MDTextField:
+            id: name
+            hint_text: "Your name (press enter to submit)"
+            helper_text: root.helper_text
+            helper_text_mode: "on_focus"
+            pos_hint:  {"center_y": .75}
+            size_hint: dp(1),dp(0.11)
+            font_size: 18
+            active_line: False
+            normal_color: 0.1,0.1,0.1,0.1
+            color_active: 0.4,0.4,0.4,0.4
+            mode: "rectangle"
+            on_text_validate: root.validate(self)
+
+
+<SecondWindow>
+    name: "second"
+    MDRelativeLayout:
+        id: RL_TWO
+        Image:
+            id: image_holder
+            source: root.image_addr
+        MDLabel:
+            id: progressbar
+            text: root.progress
+            pos_hint: {"x":0.5,"y":-0.35}
+        MDLabel:
+            id: other_data
+            text: root.infos
+            pos_hint: {"x":0.1,"y":-0.35}
