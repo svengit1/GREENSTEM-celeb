@@ -1,3 +1,5 @@
 AID,Name,Assigned,Current,Complete
 0,Gabriel Janđel,0-1500,1500,1
-1,Sven Matković,1500-3000,1500,0
+1,Sven Matković,1500-3000,3000,1
+2,Gabriel Janđel,3000-6500,3076,0
+3,Sven Matković,6500-10000,6500,0

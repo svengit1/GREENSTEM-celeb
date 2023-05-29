@@ -83,19 +83,17 @@ class ImagerUser(User):
         self.id = last_id
 
     def add_img(self, label, name):
-        if self.id<len(self.df_classes):
-            x = self.df_classes.iloc[self.id]
+        if self.id-self.start<len(self.df_classes):
+            x = self.df_classes.iloc[self.id-self.start]
             x["Dark_Skin"] = label
-            self.df_classes.iloc[self.id] = x
+            self.df_classes.iloc[self.id-self.start] = x
         else:
             self.df_classes = self.df_classes.append(pd.DataFrame([{"ID": self.id, "Name": name, "Dark_Skin": label}]))
         self.id += 1
         self.df_classes.to_csv(f"SkinLabels_{self.aid}_{self.name.replace(' ','_')}", index=False)
-        print(self.df_classes)
-
     def get_cur_class(self):
-        if self.id<len(self.df_classes):
-            x = self.df_classes.iloc[self.id]
+        if self.id-self.start<len(self.df_classes):
+            x = self.df_classes.iloc[self.id-self.start]
             dict = {1:"Dark",0:"Not Dark"}
             return dict[x["Dark_Skin"]]
         else:
@@ -172,11 +170,11 @@ class SecondWindow(Screen, BasicWidgetFunctions):
         self.place_image(U.id)
 
     def undo(self):
-        if not U.id: return
+        if not U.id-U.start: return
         U.id -= 1
         self.place_image(U.id)
     def fwd(self):
-        if U.id>=len(U.df_classes): return
+        if U.id-U.start>=len(U.df_classes): return
         U.id += 1
         self.place_image(U.id)
 

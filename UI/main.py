@@ -87,7 +87,7 @@ class SecondWindow(Screen, BasicWidgetFunctions):
 
     def start_init(self):
         self.img_src = U.load_temp_image()
-        self.img_src = "test_img.jpg"
+        self.img_src = "IMG_test.png"
         self.box_logs = self.ids["boxTwo"]
         self.log_label = MDLabel(text="processing....")
         file, image_new, bbox, feats0,feats1 = process("", self.img_src)

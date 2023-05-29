@@ -99,6 +99,7 @@ char2int_fcm = {ch: i for i, ch in enumerate(chars_sorted_fcm)}
 model_tadjanovic = torch.load("tadjanovic_8800.pt")
 model_tadjanovic.eval()
 model_fcm = torch.load("Pjesme_final_06.pt")
-model_tadjanovic.eval()
+model_fcm.eval()
 
-# text = sample("tadjanovic","O lijepa domovino,",1000,1)
+text = sample("fcm","Živlenje o kak si mi rad!",1000,1)
+print(text)
