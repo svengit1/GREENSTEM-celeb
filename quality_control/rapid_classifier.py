@@ -25,7 +25,7 @@ img_dir = os.getcwd().split("\\")[:-1]
 new_dir = ""
 for i in img_dir:
     new_dir += i + "\\\\"
-img_dir = new_dir + "images_bboxed\\\\"
+img_dir = new_dir + "img_celeba\\\\"
 print(img_dir)
 
 
@@ -53,17 +53,19 @@ class ImagerUser(User):
         print(self.df.columns)
         assignments = self.df.loc[self.df["Name"] == name]
         assignments = assignments.loc[assignments["Complete"] == 0]
-        assignments.sort_values(by="AID")
-        aid, start,goal, current = assignments.iloc[0]["AID"], \
-                            int(assignments.iloc[0]["Assigned"].split("-")[0]), \
-                            int(assignments.iloc[0]["Assigned"].split("-")[1]), assignments.iloc[0]["Current"]
-        self.aid,self.start, self.goal, self.current = aid,start, goal, current
-        return aid, goal, current
-
+        if not assignments.empty:
+            assignments.sort_values(by="AID")
+            aid, start,goal, current = assignments.iloc[0]["AID"], \
+                                int(assignments.iloc[0]["Assigned"].split("-")[0]), \
+                                int(assignments.iloc[0]["Assigned"].split("-")[1]), assignments.iloc[0]["Current"]
+            self.aid,self.start, self.goal, self.current = aid,start, goal, current
+            return aid, goal, current
+        raise BaseException("All assigments complete, report to your manager!")
     def mod_assignment(self):
         if not self.id < len(self.df_classes):
             x = self.df.iloc[self.aid]
-            x["Current"] += 1
+            if x["Current"]<self.id:
+                x["Current"] = self.id
             print(x)
             self.df.iloc[self.aid] = x
             self.df.to_csv("logs", index=False)
@@ -88,7 +90,7 @@ class ImagerUser(User):
             x["Dark_Skin"] = label
             self.df_classes.iloc[self.id-self.start] = x
         else:
-            self.df_classes = self.df_classes.append(pd.DataFrame([{"ID": self.id, "Name": name, "Dark_Skin": label}]))
+            self.df_classes = self.df_classes._append(pd.DataFrame([{"ID": self.id, "Name": name, "Dark_Skin": label}]))
         self.id += 1
         self.df_classes.to_csv(f"SkinLabels_{self.aid}_{self.name.replace(' ','_')}", index=False)
     def get_cur_class(self):
@@ -97,7 +99,7 @@ class ImagerUser(User):
             dict = {1:"Dark",0:"Not Dark"}
             return dict[x["Dark_Skin"]]
         else:
-            return "None"
+            return None
 
     def save_temp_image(self, image):
         self.image = image
@@ -137,7 +139,7 @@ class MainWindow(Screen, BasicWidgetFunctions):
 
     def validate(self, widget):
         print("name added to registry")
-        if widget.text not in ("Gabriel Janđel", "Sven Matković"):
+        if widget.text not in ("Gabriel Janđel", "Sven Matković","Saida Deljac"):
             self.helper_text = "Error, invalid name/surname, format is Sven Matković"
             widget.text = ":("
         else:
@@ -161,7 +163,7 @@ class SecondWindow(Screen, BasicWidgetFunctions):
         print(keycode[1], keyboard, text, modifiers)
         print(self.events)
         try:self.events[keycode[1]]()
-        except: print("error, bad key")
+        except:print("error, bad key")
 
     def post(self, code):
         print(f"posting: {code}")
