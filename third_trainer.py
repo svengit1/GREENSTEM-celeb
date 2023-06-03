@@ -97,7 +97,7 @@ model = CNN_small(soft=True)
 model.to_inline(device)
 
 # loss funkcija i optimizacija
-criterion = nn.MSELoss()
+criterion = nn.CrossEntropyLoss()
 test_criterion = nn.L1Loss()
 optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
 
@@ -156,7 +156,7 @@ def main():
               f"Test Acc: {test_acc:.4f}%")
         if epoch %5 == 0 and epoch:
             print("Saving!")
-            torch.save(model,f"ATTR_MODELS/modelEp{epoch}.pt")
+            torch.save(model,f"RACE_MODELS/modelEp{epoch}.pt")
 
 if __name__ == '__main__':
     main()
