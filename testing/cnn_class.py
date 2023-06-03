@@ -142,8 +142,9 @@ class CNN(nn.Module):
 
 
 class CNN_small(nn.Module):
-    def __init__(self):
+    def __init__(self,soft=False):
         super().__init__()
+        self.soft = soft
         self.b1_conv1 = nn.Conv2d(3, 16, kernel_size=(8, 8), padding=6)
         self.b1_act1 = nn.ReLU()
         self.b1_drop1 = [nn.Dropout(0.3),nn.Dropout(0.3)]
@@ -199,6 +200,11 @@ class CNN_small(nn.Module):
             self.fc4
         ]
 
+        self.softmax = [
+            nn.Linear(10,1),
+            nn.Softmax()
+        ]
+
         self.block_array = {
             "block_one": self.block_one,
             "drop": self.b1_drop1,
@@ -223,4 +229,7 @@ class CNN_small(nn.Module):
             x= f(x)
         for f in self.flattening:
             x = f(x)
+        if self.soft:
+            for f in self.softmax:
+                x = f(x)
         return x
