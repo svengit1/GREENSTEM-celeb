@@ -73,12 +73,13 @@ for imgID in tqdm(feat_dicts.keys()):
         bad_log.append(imgID)
         continue
     landmarks_processed = process_landmarks(bbox_dicts,feat_dicts[imgID])
-    new_line = f"{'0' * (6 - len(str(curr_id)))}{curr_id}"+".jpg"
+    true_id = int(imgID.split(".")[0])
+    new_line = imgID
     for l_x,l_y in landmarks_processed:
         new_line += f" {l_x} {l_y}"
     new_line += "\n"
     new_writer.write(new_line)
-    image.save(f"img_celeba_bboxed/{'0' * (6 - len(str(curr_id)))}{curr_id}.jpg")
+    image.save(f"img_celeba_bboxed/{imgID}")
     curr_id += 1
     #drawer.process_feats(image,process_landmarks(bbox_dicts,feat_dicts[imgID]))
 

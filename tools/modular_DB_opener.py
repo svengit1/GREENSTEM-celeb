@@ -10,11 +10,13 @@ class Opener:
 
     def GetData(self, table, parameter): #wrapper oko Fetch funkcije
         command = f"SELECT * FROM {table} WHERE {parameter}"
-        return self.__Fetch(command).fetchall()
+        return self.Fetch(command).fetchall()
 
     def FetchAll(self,table):
-        return self.__Fetch(f"SELECT * FROM {table}").fetchall()
+        return self.Fetch(f"SELECT * FROM {table}").fetchall()
 
-    def __Fetch(self, command):
+    def Fetch(self, command):
         self.CUR.execute(command)
         return self.CUR
+
+

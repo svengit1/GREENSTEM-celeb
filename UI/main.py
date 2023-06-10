@@ -84,20 +84,23 @@ class SecondWindow(Screen, BasicWidgetFunctions):
     img_src = StringProperty("")
     processed_img_src = StringProperty("")
     landmarked_img_src = StringProperty("")
+    bottom_text = StringProperty("Done!, you look like the person on the right..")
 
     def start_init(self):
         self.img_src = U.load_temp_image()
         self.img_src = "IMG_test.png"
         self.box_logs = self.ids["boxTwo"]
-        self.log_label = MDLabel(text="processing....")
-        file, image_new, bbox, feats0,feats1 = process("", self.img_src)
+        file, image_new, bbox, feats0,feats1,race,gender,age,inapprop = process("", self.img_src)
         D.process_img(base=False,image=Img.open(self.img_src),bbox=bbox,save=True)
         D.process_feats(img=image_new,features=feats0)
         self.processed_img_src = "processed_bbox.png"
         self.landmarked_img_src = "processed_feats.png"
+        if inapprop:
+            self.log_label = MDLabel(text=f"match is {file}, \n it is most probably inappropriate")
+        else:
+            self.log_label = Image(source="../img_celeba/"+file)
         self.box_logs.add_widget(self.log_label)
-        self.log_label.text = f"{file}"
-        self.log_label.halign = "center"
+        self.bottom_text = f"You are {gender} and probably {race} and {age}"
 
     def go_back(self):
         os.remove(self.img_src)

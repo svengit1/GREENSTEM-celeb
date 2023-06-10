@@ -43,15 +43,22 @@ class MatcherDataset(modular_DB_opener.Opener):
 
     def calc_dev(self, items):
         #assert items.__class__ == np.array()
-        return np.sum(items - self.avgs[1:-1]).item()
+        return np.sum(items - self.avgs[1:-5]).item()
+
+    def getSelectiveMathces(self,age,gender,race):
+        return super().Fetch(f"SELECT * FROM features_with_mean WHERE age={age} AND gender={gender} AND dark_skin={race}").fetchall()
 
     def __call__(self, **kwargs):
         if not "feats" in kwargs:
             raise BaseException("please provide list of features of size 10")
+        race = kwargs["race"]
+        gender = kwargs["gender"]
+        age = kwargs["age"]
+        local_data = self.getSelectiveMathces(age,gender,race)
         deviation = self.calc_dev(items=kwargs["feats"])
         # možda će biti problema sa binary searchem
-        search_res = binary_search(self.MemoryContainer, deviation)
+        search_res = binary_search(local_data, deviation)
         # razlika između suma devijacija
-        match_diff = abs(deviation - self.MemoryContainer[search_res][0])
-        match = self.MemoryContainer[search_res]
-        return match, match_diff
+        match_diff = abs(deviation - local_data[search_res][0])
+        match = local_data[search_res]
+        return match, match_diff,local_data[search_res][-5]
