@@ -1,12 +1,10 @@
 import numpy as np
 import torch
-import torch.nn as nn
 from PIL import Image
 from torchvision import transforms
 from torchvision.transforms import ToTensor
-from FDA import MatcherDataset
-from testing.cnn_class import CNN
-from plotting.CelebADrawer import BboxDrawer
+from tools.feature_matching_algorithm import MatcherDataset
+from tools.celeba_drawer import BboxDrawer
 
 device = torch.device('cpu')
 

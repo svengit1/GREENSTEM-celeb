@@ -1,23 +1,18 @@
 import os
-import re
 import time
 
-from kivy.clock import Clock
+from PIL import Image as Img
 from kivy.core.window import Window
 from kivy.lang import Builder
-from kivy.metrics import dp
-from kivy.properties import StringProperty, BooleanProperty
-from kivy.uix.behaviors import ButtonBehavior
+from kivy.properties import StringProperty
 from kivy.uix.image import Image
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivymd.app import MDApp
-from kivymd.uix.button import MDFlatButton, MDFillRoundFlatButton
-from kivymd.uix.dialog import MDDialog
 from kivymd.uix.label import MDLabel
-from kivymd.uix.menu import MDDropdownMenu
-from plotting import CelebADrawer
+
 from loader import process
-from PIL import Image as Img
+from plotting import CelebADrawer
+
 
 class User:
 
@@ -71,8 +66,8 @@ class MainWindow(Screen, BasicWidgetFunctions):
     def capture_image(self):
         camera = self.ids["camera"]
         timestr = time.strftime("%Y%m%d_%H%M%S")
-        camera.export_to_png("IMG_test.png")
-        image = "IMG_test.png"
+        camera.export_to_png("temp_image.png")
+        image = "temp_image.png"
         opener = Img.open(image)
         opener.resize((1920,1080)).save(image)
         print("Captured")
@@ -88,7 +83,6 @@ class SecondWindow(Screen, BasicWidgetFunctions):
 
     def start_init(self):
         self.img_src = U.load_temp_image()
-        self.img_src = "IMG_test.png"
         self.box_logs = self.ids["boxTwo"]
         file, image_new, bbox, feats0,feats1,race,gender,age,inapprop = process("", self.img_src)
         D.process_img(base=False,image=Img.open(self.img_src),bbox=bbox,save=True)
@@ -126,7 +120,7 @@ class MainApp(MDApp):
         return Start_Screen
 
 
-D = CelebADrawer.BboxDrawer()
+D = CelebADrawer.PillowManipulator()
 U = User()
 X = MainApp()
 X.run()

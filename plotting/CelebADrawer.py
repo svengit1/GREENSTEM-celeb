@@ -81,16 +81,15 @@ class BboxDrawer:
                  img_size[1] - (feat_data[i][1] + bbox_data["y_1"])) for i in range(0, len(feat_data))]
 
 
-class PillowManipulator:
+class PillowManipulator(BboxDrawer):
 
-    def __init__(self):
-        self.drawer_inst = BboxDrawer()
 
     def make_bbox(self, x_1, y_1, w, h):
-        BboxDrawer.make_box(self.drawer_inst, x_1, y_1, w, h)
+        super().make_box(x_1, y_1, w, h)
+
 
     def draw_feats(self,image,features:list[tuple],size=1.0,color="blue"):
-        BboxDrawer.process_feats(self.drawer_inst,image,features,size,color)
+        super().process_feats(image,features,size,color)
 
     def __process_datas(self, old_size, new_size, data):
         if data.__class__ == list:
@@ -100,7 +99,7 @@ class PillowManipulator:
                     data[i] = dat
         return data[0] / old_size[0] * new_size[0], data[1] / old_size[1] * new_size[1]
 
-    def process_resize_img(self, img, new_size, data: list[tuple]):
+    def process_resize_img_spec(self, img, new_size, data: list[tuple]):
         old_size = img.size
         data = self.__process_datas(old_size,new_size,data)
         img = img.resize(new_size)

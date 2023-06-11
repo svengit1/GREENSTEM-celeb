@@ -7,17 +7,17 @@ from torch.utils.data import Dataset, DataLoader
 from torchvision import transforms
 from tqdm import tqdm
 
-from loader_three import process_image,process_image_bbox,model_one
+from loader_quality_control_NEWEST import process_image, process_image_bbox, model_one
 
 size_resized = (218, 218)
 transform = transforms.Compose([
     transforms.Resize(size_resized),
-    transforms.ToTensor(),  # ne treba normalizirati, bolje je ostavljati u rgb formatu
+    transforms.ToTensor(),
 ])
 
 
 class CelebADatasetID(Dataset):
-    def __init__(self, image_folder,label_transform=None, transform=None):
+    def __init__(self, image_folder, label_transform=None, transform=None):
         self.image_folder = image_folder
         self.transform = transform
         self.image_files = os.listdir(image_folder)
@@ -27,22 +27,21 @@ class CelebADatasetID(Dataset):
         return len(self.image_files)
 
     def __getitem__(self, index):
-        # Get bounding box for the current image
-        image = Image.open(self.image_folder+"/"+self.image_files[index]).convert('RGB')
+        image = Image.open(self.image_folder + "/" + self.image_files[index]).convert('RGB')
         labels = self.image_files[index]
-        #image.show()
+        # image.show()
         if self.transform:
             image = self.transform(image)
         return image, labels
 
+
 labels_df = []
 images_raw = os.listdir("img_celeba")
-images_bboxed= os.listdir("img_celeba_bboxed")
-
+images_bboxed = os.listdir("img_celeba_bboxed")
 
 batch_size = 1
-loader_raw = CelebADatasetID("img_celeba","",transform=transform)
-loader_raw = DataLoader(loader_raw,batch_size=batch_size,shuffle=False)
+loader_raw = CelebADatasetID("img_celeba", "", transform=transform)
+loader_raw = DataLoader(loader_raw, batch_size=batch_size, shuffle=False)
 
 path_raw = "img_celeba/"
 path_bboxed = "img_celeba_bboxed/"
@@ -51,7 +50,8 @@ model_approp = torch.load("INAPPROP_MODELS/modelEp3.pt").eval()
 global id
 id = 0
 
-def process(image,file):
+
+def process(image, file):
     global id
     global labels_df
     file = file[0].replace(".jpg", "")
@@ -64,6 +64,7 @@ def process(image,file):
     labels_df.append(dct)
     id += 1
 
-for image,file in tqdm(loader_raw):
-    process(image,file)
+
+for image, file in tqdm(loader_raw):
+    process(image, file)
 pd.DataFrame(labels_df).to_csv("Anno/labels_qc.csv", index=False)

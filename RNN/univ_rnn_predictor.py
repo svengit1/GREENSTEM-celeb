@@ -1,6 +1,4 @@
 import re
-import time
-
 import numpy as np
 import torch
 import torch.nn as nn
@@ -96,9 +94,9 @@ char_array_tadjanovic = np.array(chars_sorted_tadjanovic)
 char2int_tadjanovic = {ch: i for i, ch in enumerate(chars_sorted_tadjanovic)}
 char_array_fcm = np.array(chars_sorted_fcm)
 char2int_fcm = {ch: i for i, ch in enumerate(chars_sorted_fcm)}
-model_tadjanovic = torch.load("tadjanovic_8800.pt")
+model_tadjanovic = torch.load("TADJANOVIC_LSTM_MODEL.pt")
 model_tadjanovic.eval()
-model_fcm = torch.load("Pjesme_final_06.pt")
+model_fcm = torch.load("FCM_LSTM_MODEL.pt")
 model_fcm.eval()
 
 text = sample("fcm","Živlenje o kak si mi rad!",1000,1)

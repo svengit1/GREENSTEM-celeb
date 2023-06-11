@@ -1,24 +1,12 @@
 import os
-import re
-import sys
-import time
 
 import pandas as pd
-from kivy.clock import Clock
 from kivy.core.window import Window
 from kivy.lang import Builder
-from kivy.metrics import dp
-from kivy.properties import StringProperty, BooleanProperty
-from kivy.uix.behaviors import ButtonBehavior
-from kivy.uix.image import Image
+from kivy.properties import StringProperty
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivymd.app import MDApp
-from kivymd.uix.button import MDFlatButton, MDFillRoundFlatButton
-from kivymd.uix.dialog import MDDialog
-from kivymd.uix.label import MDLabel
-from kivymd.uix.menu import MDDropdownMenu
-from kivymd.uix.relativelayout import MDRelativeLayout
-from PIL import Image as PIL_Image
+
 from plotting import CelebADrawer
 
 img_dir = os.getcwd().split("\\")[:-1]

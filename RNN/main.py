@@ -5,7 +5,6 @@ from SqlConnect import *
 from univ_rnn_predictor import sample
 
 class Queue(deque):
-
     def enqueue(self, item):
         self.append(item)
 

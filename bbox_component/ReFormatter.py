@@ -16,9 +16,11 @@ model_size = (218, 218)
 
 
 def format_landmarks(df_landmarks):
+    # OVO SAM USPJEŠNO OPTIMIZIRAO NEGDI, RN JE UŽASNNO SPORO (30 min), MOŽE BITI GOTOVO ZA 2 sek
     landmark_dict = {}
     helper = lambda i, j, row: tuple(df_landmarks[[df_landmarks.columns[i],
                                                    df_landmarks.columns[j]]].iloc[row])
+
     for i in tqdm(range(1,len(df_landmarks))):
         landmark_dict[f"{'0' * (6 - len(str(i)))}{i}"] = [
             helper(0, 1, i-1),

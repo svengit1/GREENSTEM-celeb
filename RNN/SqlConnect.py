@@ -9,7 +9,6 @@ def connect(host, database, user, password):
                            database=database,
                            user=user,
                            password=password)
-
     if conn:
         print('Connected to MySQL database')
         return conn

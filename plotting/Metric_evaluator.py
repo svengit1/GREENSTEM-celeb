@@ -11,7 +11,6 @@ from PIL import Image
 import pandas as pd
 from tqdm import tqdm
 import json
-
 from testing.cnn_class import CNN
 
 size_resized = (218,218)
