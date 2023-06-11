@@ -67,4 +67,4 @@ def process(image, file):
 
 for image, file in tqdm(loader_raw):
     process(image, file)
-pd.DataFrame(labels_df).to_csv("Anno/labels_qc.csv", index=False)
+pd.DataFrame(labels_df).to_csv("Anno/custom/list_attr_quality_control.txt", index=False)

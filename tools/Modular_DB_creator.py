@@ -22,7 +22,7 @@ import sqlite3
 
 # MANUAL - Assembler - Init - ako nece datawipe, dodati parameter "NO"
 #                             create_tables: za sada po 1 table i values u listi za taj tables, FUTURE - more tables
-#                             Add_to_table: Specificirat koji table i dat tocno vals, inace error
+#                             Add_to_table: Specificirat koji table i standardized_landmarks tocno vals, inace error
 #                             FetchAllTables: Tocno to - vraca tuple, specificnije - (TABLE, (VALUES))
 #                             ResetDB - zamisljeno kao internal Funkcija - moze se koristiti kao except, ako table=init
 

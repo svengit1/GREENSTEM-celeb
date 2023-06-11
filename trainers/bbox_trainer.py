@@ -26,7 +26,7 @@ class CelebADataset(CelebADatasetParent):
 
 
 image_dir = "../img_celeba"
-bbox_dir = "../Anno/list_bbox_celeba.txt"
+bbox_dir = "../Anno/existing/list_bbox_celeba.txt"
 dataset = CelebADataset(image_dir, bbox_dir, image_transform=transform, label_transform=bbox_transform,
                         delim_whitespace=True)
 

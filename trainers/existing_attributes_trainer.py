@@ -17,10 +17,8 @@ desired_celeba_attribute = 21
 
 
 def transform_labels(labels):
-    # Male label: -1 or 1
+    # Male label: 0 or 1
     labels = labels[desired_celeba_attribute]
-    d = {-1: 0, 1: 1}
-    labels = d[labels]
     return labels
 
 
@@ -33,7 +31,7 @@ class CelebADataset(CelebADatasetParent):
 
 
 image_dir = "./img_celeba_bboxed2"
-bbox_dir = "../Anno/list_attr_celeba.txt"
+bbox_dir = "../Anno/existing/list_attr_celeba.txt"
 
 dataset = CelebADataset(image_dir, bbox_dir, image_transform=transform, label_transform=transform_labels)
 

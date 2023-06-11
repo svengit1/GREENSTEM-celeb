@@ -26,7 +26,7 @@ class CelebADataset(CelebADatasetParent):
 
 
 image_dir = "../img_celeba"
-bbox_dir = "../Anno/list_landmarks_resized_celeba.txt"
+bbox_dir = "../Anno/custom/list_landmarks_reshaped_celeba.txt"
 dataset = CelebADataset(image_dir, bbox_dir, image_transform=transform, label_transform=label_transform,
                         df_index_key="Name")
 

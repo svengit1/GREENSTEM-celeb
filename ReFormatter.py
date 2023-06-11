@@ -6,7 +6,7 @@ from tqdm import tqdm
 
 from plotting.CelebADrawer import BboxDrawer
 
-df_landmarks = pd.read_csv("Anno/list_landmarks_celeba.txt", delim_whitespace=True)
+df_landmarks = pd.read_csv("Anno/existing/list_landmarks_celeba.txt", delim_whitespace=True)
 print(df_landmarks.columns)
 print(df_landmarks[[df_landmarks.columns[0], df_landmarks.columns[1]]].iloc[0])
 model = torch.load("BBOX_MODELS/modelEp9.pt")
@@ -62,7 +62,7 @@ def process_image(path, file):
 feat_dicts = format_landmarks(df_landmarks)
 
 bad_log = []
-new_writer = open("Anno/list_landmarks_resized_celeba.txt","w")
+new_writer = open("Anno/custom/list_landmarks_reshaped_celeba.txt", "w")
 new_writer.write("lefteye_x lefteye_y righteye_x righteye_y nose_x nose_y leftmouth_x leftmouth_y rightmouth_x rightmouth_y\n")
 curr_id = 0
 for imgID in tqdm(feat_dicts.keys()):
@@ -76,7 +76,7 @@ for imgID in tqdm(feat_dicts.keys()):
     true_id = int(imgID.split(".")[0])
     new_line = imgID+".jpg"
     for l_x,l_y in landmarks_processed:
-        new_line += f" {l_x} {l_y}"
+        new_line += f",{l_x} {l_y}"
     new_line += "\n"
     new_writer.write(new_line)
     image.save(f"img_celeba_bboxed2/{imgID}.jpg")

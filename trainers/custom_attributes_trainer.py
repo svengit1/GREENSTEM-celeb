@@ -29,7 +29,7 @@ class CelebADataset(CelebADatasetParent):
 
 
 image_dir = "../img_celeba"
-bbox_dir = "../Anno/labels_qc.csv"
+bbox_dir = "../Anno/custom/list_attr_quality_control.txt"
 
 dataset = CelebADataset(image_dir, bbox_dir, image_transform=transform, label_transform=transform_labels)
 
