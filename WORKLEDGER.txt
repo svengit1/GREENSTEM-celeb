@@ -1,0 +1,3 @@
+SVEN-Reformatter,QualityControl,bbox component -> ja maknem prvo
+FRAN-Plotting,Dataset_Processor- Pazi na inheritance
+GABRIEL-Anno,UI-maknut,loaderi
