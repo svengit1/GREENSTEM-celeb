@@ -98,6 +98,7 @@ class ImagerUser(User):
 
 class BasicWidgetFunctions:
 
+
     def goto_window(self, window_id):
         U.set_last_screen(self.manager.current)
         self.manager.current = U[window_id]

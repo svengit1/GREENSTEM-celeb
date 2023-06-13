@@ -4,7 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="60475b18-b91a-4366-ae7a-6ce560f1c9d3" name="Changes" comment="Rapid classifier remade" />
+    <list default="true" id="60475b18-b91a-4366-ae7a-6ce560f1c9d3" name="Changes" comment="Rapid classifier remade">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dataset_processor.py" beforeDir="false" afterPath="$PROJECT_DIR$/Dataset_processor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RNN/univ_rnn_predictor.py" beforeDir="false" afterPath="$PROJECT_DIR$/RNN/univ_rnn_predictor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReFormatter.py" beforeDir="false" afterPath="$PROJECT_DIR$/ReFormatter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/loader_features_bbox.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/loader_quality_control_NEWEST.py" beforeDir="false" afterPath="$PROJECT_DIR$/loader_quality_control_NEWEST.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/more_reformatting.py" beforeDir="false" afterPath="$PROJECT_DIR$/more_reformatting.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/newest_loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/newest_loader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plotting/CelebADrawer.py" beforeDir="false" afterPath="$PROJECT_DIR$/plotting/CelebADrawer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quality_control/hand_classifier_app/rapid_classifier.py" beforeDir="false" afterPath="$PROJECT_DIR$/quality_control/hand_classifier_app/rapid_classifier.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/feature_matching_algorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/tools/feature_matching_algorithm.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -64,8 +77,8 @@
       <recent name="C:\Users\k\PycharmProjects\GREENSTEM-celeb\quality_control\SkinLabels" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.main">
-    <configuration name="FDA_preformatting" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.loader_quality_control_NEWEST">
+    <configuration name="CelebADrawer" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="GREENSTEM-celeb" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -73,32 +86,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Anno" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/plotting" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Anno/FDA_preformatting.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="fix" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="GREENSTEM-celeb" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Anno" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Anno/fix.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/plotting/CelebADrawer.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -120,6 +112,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/UI/loader.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="loader_quality_control_NEWEST" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="GREENSTEM-celeb" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/loader_quality_control_NEWEST.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -172,11 +185,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.loader_quality_control_NEWEST" />
+        <item itemvalue="Python.CelebADrawer" />
         <item itemvalue="Python.main" />
         <item itemvalue="Python.third_trainer" />
         <item itemvalue="Python.loader" />
-        <item itemvalue="Python.FDA_preformatting" />
-        <item itemvalue="Python.fix" />
       </list>
     </recent_temporary>
   </component>
@@ -297,7 +310,13 @@
       <option name="presentableId" value="LOCAL−00018" />
       <updated>1686564098030</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL−00019" summary="Rapid classifier remade">
+      <created>1686655185721</created>
+      <option name="number" value="LOCAL−00019" />
+      <option name="presentableId" value="LOCAL−00019" />
+      <updated>1686655185721</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -361,6 +380,11 @@
           <url>file://$PROJECT_DIR$/bbox_component/ReFormatter.py</url>
           <line>40</line>
           <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/loader_quality_control_NEWEST.py</url>
+          <line>40</line>
+          <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

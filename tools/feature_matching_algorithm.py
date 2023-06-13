@@ -55,9 +55,7 @@ class MatcherDataset(modular_DB_opener.Opener):
         age = kwargs["age"]
         local_data = self.getSelectiveMathces(age, gender, race)
         deviation = self.calc_dev(items=kwargs["feats"])
-        # možda će biti problema sa binary searchem
         search_res = binary_search(local_data, deviation)
-        # razlika između suma devijacija
         match_diff = abs(deviation - local_data[search_res][0])
         match = local_data[search_res]
         return match, match_diff, local_data[search_res][-5]

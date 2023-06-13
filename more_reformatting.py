@@ -4,12 +4,12 @@ from PIL import Image
 from torchvision.transforms import ToTensor
 from tqdm import tqdm
 
-from plotting.CelebADrawer import BboxDrawer
+from plotting.CelebADrawer import BboxFeatDrawer
 
 df_landmarks = pd.read_csv("Anno/custom/list_landmarks_reshaped_celeba.txt", delim_whitespace=False)
 print(df_landmarks.columns)
 print(df_landmarks[[df_landmarks.columns[0], df_landmarks.columns[1]]].iloc[0])
-drawer = BboxDrawer()
+drawer = BboxFeatDrawer()
 model_size = (218, 218)
 
 

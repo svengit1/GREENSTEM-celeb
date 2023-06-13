@@ -7,7 +7,7 @@ from torch.utils.data import Dataset, DataLoader
 from torchvision import transforms
 from tqdm import tqdm
 
-from loader_quality_control_NEWEST import process_image, process_image_bbox, model_one
+from loader_quality_control_NEWEST import process_image, process_image_bbox, bbox_model
 
 size_resized = (218, 218)
 transform = transforms.Compose([
@@ -55,7 +55,7 @@ def process(image, file):
     global id
     global labels_df
     file = file[0].replace(".jpg", "")
-    _, face_img = process_image_bbox(path_raw, file, model_one)
+    _, face_img = process_image_bbox(path_raw, file, bbox_model)
     inappropriate_label, _, _ = process_image(path_raw, file, model_approp)
     race_label, _, _ = process_image(path_raw, "", model_race, image=face_img)
     inappropriate_label = argmax(inappropriate_label).item()

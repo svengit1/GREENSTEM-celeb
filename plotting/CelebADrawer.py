@@ -1,95 +1,8 @@
-import os
-import matplotlib.image as image
-import pandas as pd
-from matplotlib import pyplot as plt
-from PIL import Image, ImageDraw
+from PIL import ImageDraw
 
 
-### INIT DAJES DIR_ADDR: TAMO SU SLIKE i CSV_ADDR: ime/adresa samog csv filea
-### KADA ZELIS NEKU SLIKU PRIKAZATI SA BBOXOM, ZOVES process_img od inicializiranog objekta,
-class BboxDrawer:
-
-    def __init__(self, dir_addr="", csv_addr=""):
-        if csv_addr:
-            self.bbox_datas = pd.read_csv(csv_addr, delim_whitespace=True)
-            self.dir_addr = dir_addr
-            self.all_dirs = {int(item.split(".")[0]): item for item in os.listdir(dir_addr)}
-
-    def make_box(self, x_1, y_1, w, h):
-        x = [x_1, x_1 + w, x_1 + w, x_1, x_1]
-        y = [y_1, y_1, y_1 + h, y_1 + h, y_1]
-        return x, y
-
-    def process_img(self, debug=True, base=True, save=False, **kwargs):
-        print(kwargs)
-        if not base:
-            img = kwargs["image"]
-            bbox_data = kwargs["bbox"]
-        else:
-            file = self.all_dirs[kwargs["image_id"]]
-            img = image.imread(self.dir_addr + "/" + file)
-            bbox_data = self.bbox_datas.iloc[kwargs["image_id"] - 1]
-        if debug:
-            print(bbox_data)
-            print(bbox_data.__class__)
-        x, y = self.make_box(bbox_data["x_1"], bbox_data["y_1"], bbox_data["width"], bbox_data["height"])
-        draw = ImageDraw.Draw(img)
-        draw.rectangle((x[0], y[0], x[2], y[2]), width=10, outline="green")
-        if save:
-            img.save("processed_bbox.png")
-            return
-        plt.show()
-
-    def process_feats(self, img, features: list[tuple],size=1.0,color="blue"):
-        draw = ImageDraw.Draw(img)
-        for l_x, l_y in features:
-            draw.polygon((l_x - 10*size, l_y, l_x, l_y + 10*size, l_x + 10*size, l_y,
-                          l_x, l_y - 10*size), fill=color)
-        img.save("processed_feats.png")
-
-    def process_resize_img(self, image_id, new_size: tuple = (218, 178), save=False):
-        file = self.all_dirs[image_id]
-        bbox_data = self.bbox_datas.iloc[image_id - 1]
-        image = Image.open(self.dir_addr + "/" + file)
-        img = image.resize(new_size)
-        image_size = image.size
-        bbox_data = self.resize_bbox(bbox_data, image_size, new_size)
-        x, y = self.make_box(bbox_data["x_1"],
-                             bbox_data["y_1"],
-                             bbox_data["width"],
-                             bbox_data["height"])
-        print(x, y)
-        plt.plot(x, y, color="black", linewidth=3)
-        if save:
-            plt.savefig("processed.jpg")
-            return
-        plt.imshow(img)
-        plt.show()
-
-    def resize_bbox(self, bbox_data: dict, old_size: tuple, new_size: tuple):
-        return {"x_1": bbox_data["x_1"] * new_size[0] / old_size[0],
-                "y_1": bbox_data["y_1"] * new_size[1] / old_size[1],
-                "width": bbox_data["width"] * new_size[0] / old_size[0],
-                "height": bbox_data["height"] * new_size[1] / old_size[1]}
-
-    def resize_feats(self, feat_data: list, old_size: tuple, new_size: tuple):
-        return [(round(feat_data[i][0] * new_size[0] / old_size[0]),
-                 round(feat_data[i][1] * new_size[1] / old_size[1])) for i in range(0, len(feat_data))]
-
-    def reshape_feats(self, feat_data: list, bbox_data, img_size):
-        return [(feat_data[i][0] + bbox_data["x_1"],
-                 img_size[1] - (feat_data[i][1] + bbox_data["y_1"])) for i in range(0, len(feat_data))]
-
-
-class PillowManipulator(BboxDrawer):
-
-
-    def make_bbox(self, x_1, y_1, w, h):
-        super().make_box(x_1, y_1, w, h)
-
-
-    def draw_feats(self,image,features:list[tuple],size=1.0,color="blue"):
-        super().process_feats(image,features,size,color)
+# Pretežito gotovo
+class BboxFeatDrawer:
 
     def __process_datas(self, old_size, new_size, data):
         if data.__class__ == list:
@@ -97,32 +10,67 @@ class PillowManipulator(BboxDrawer):
                 dat = self.__process_datas(old_size, new_size, data[i])
                 if dat:
                     data[i] = dat
-        return data[0] / old_size[0] * new_size[0], data[1] / old_size[1] * new_size[1]
+        elif data.__class__ == tuple:
+            return tuple([data[index] / old_size[index] * new_size[index] for index in range(len(data))])
+        else:
+            raise NotImplementedError(f"Datatype {data.__class__} found!, not supported or invalid.")
+        return data
+
+    def paint_bbox(self, img, bbox_data, save=False):
+        bbox_data = self.resize_bbox(bbox_data)
+        draw = ImageDraw.Draw(img)
+        draw.rectangle(bbox_data, width=10, outline="green")
+        if save:
+            img.save("processed_bbox.png")
+            return
+
+    def paint_features(self, img, features: list[tuple], size=1.0, color="blue"):
+        draw = ImageDraw.Draw(img)
+        for l_x, l_y in features:
+            draw.polygon((l_x - 10 * size, l_y, l_x, l_y + 10 * size, l_x + 10 * size, l_y,
+                          l_x, l_y - 10 * size), fill=color)
+        img.save("processed_feats.png")
+
+    def __re_tuple(self, list):
+        return [(list[i], list[i + 1]) for i in range(0,len(list), 2)] if list[0].__class__ != tuple else list
+
+    def __un_tuple(self,list):
+        new_list= []
+        for a,b in list:
+            new_list.append(a)
+            new_list.append(b)
+        return new_list
+
+    def resize_bbox(self, bbox_data, old_size: tuple = None, new_size: tuple = None, separate=False):
+        if bbox_data.__class__ == dict: self.__standardize_bbox(bbox_data)
+        if new_size: bbox_data = self.__un_tuple(self.__process_datas(old_size, new_size, self.__re_tuple(bbox_data)))
+        return bbox_data if not separate else self.__separate_tuples(bbox_data)
+
+    def __standardize_bbox(self, bbox):
+        bbox = bbox.values()
+        return [(bbox[0], bbox[1]), (bbox[0] + bbox[2], bbox[1] + bbox[3])]
+
+    def __separate_tuples(self, array: list[tuple]):
+        x = [[] for _ in range(len(array[0]))]
+        for element in array:
+            for e in range(len(element)):
+                x[e].append(element[e])
+        return x
+
+    def resize_feats(self, feat_data: list, old_size: tuple, new_size: tuple):
+        self.__process_datas(old_size, new_size, self.__re_tuple(feat_data))
+        return feat_data
+
+    def reshape_feats(self, feat_data: list, bbox_data, img_size):
+        feat_data = self.__re_tuple(feat_data)
+        return [(feat_data[i][0] + bbox_data[0],
+                 img_size[1] - (feat_data[i][1] + bbox_data[1])) for i in range(0, len(feat_data))]
+
+
+class PillowManipulator(BboxFeatDrawer):
 
     def process_resize_img_spec(self, img, new_size, data: list[tuple]):
         old_size = img.size
-        data = self.__process_datas(old_size,new_size,data)
+        data = self.__process_datas(old_size, new_size, data)
         img = img.resize(new_size)
-        return img,data
-
-class NoseManipulator(PillowManipulator):
-
-    def __init__(self):
-        super(NoseManipulator, self).__init__()
-
-    def get_nose_area(self,image,feats,crop_size):
-        nose_coords = [feats[2][0],feats[2][1]]*2
-        print(nose_coords)
-        crop_size=10*crop_size
-        cropping= [nose_coords[0]-crop_size,nose_coords[1]-crop_size,nose_coords[0]+crop_size,nose_coords[1]+crop_size]
-        print(cropping)
-        print(image.size)
-        return image.crop(cropping)
-
-
-
-
-##PRIMJER
-# processor = BboxDrawer(dir_addr="test_images",csv_addr="bbox_mini.csv")
-# processor.process_img(image_id=5)
-# processor.process_resize_img(image_id=5)
+        return img, data

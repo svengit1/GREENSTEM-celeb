@@ -79,7 +79,7 @@ class RNN(nn.Module):
         self.fc = nn.Linear(rnn_hidden_size, vocab_size)
 
     def forward(self, x, hidden, cell):
-        out = self.embedding(x).unsqueeze(1)
+        out = self.embedding(x).un_squeeze(1)
         out, (hidden, cell) = self.rnn(out, (hidden, cell))
         out = self.fc(out).reshape(out.size(0), -1)
         return out, hidden, cell
