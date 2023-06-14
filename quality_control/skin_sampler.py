@@ -67,9 +67,6 @@ class CelebADataset(Dataset):
         return image, bbox, feats
 
 
-from plotting.CelebADrawer import NoseManipulator
-
-drawer = NoseManipulator()
 
 root_dir = "C:\\Users\\gabri\\Desktop\\Python Tools\\python-projekti\\GREENSTEM-celeb\\"
 image_folder = root_dir + "images_bboxed\\"

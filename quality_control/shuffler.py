@@ -1,9 +1,11 @@
 import pandas as pd
 
-dset = pd.read_csv("processed_examples_TO_BACKUP/processed_SkinLabels_data.csv")
-del dset["ID"]
-dset = dset.sample(frac=1,
-                   random_state=21,
+
+##OBSOLETE, DATALOADER ISTO SHUFLLEA
+def shuffle_dataset(path,file,index_by="ID",seed=1):
+    df = pd.read_csv(path + file)
+    del df[index_by]
+    df = df.sample(frac=1,
+                   random_state=seed,
                    ).reset_index()
-del dset["index"]
-dset.to_csv("processed_SkinLabels_data.csv")
+    df.to_csv("processed_SkinLabels_data.csv", index=False)
