@@ -1,6 +1,5 @@
 # koristiti će se img_bboxed i njihovi odgovarajući handmade features
 import os
-
 import numpy as np
 import pandas as pd
 import torch
@@ -8,19 +7,6 @@ from PIL import Image
 from torch.utils.data import Dataset
 import torchvision.transforms as transforms
 
-""" DYNAMIC PROTOTYPING
-import math
-print("Input some code: (leave empty line when done) \n")
-code = "code"
-codes = ""
-while code:
-    code = input()
-    codes += code+"\n"
-exec(codes,{"math":math})
-imports = input("Specify wished import:")
-__import__(imports)
-print(dir(imports))
-"""
 
 new_size = (218, 218)
 transform = transforms.Compose([transforms.Resize(new_size)])
@@ -74,6 +60,7 @@ landmark_loc = root_dir + "Anno\\list_landmarks_resized_celeba.txt"
 bbox_loc = ""
 mode = "landm"
 loader = CelebADataset(image_folder, bbox_loc, landmark_loc, new_size, mode, transform)
+
 for ind in range(10000):
     image, _, feats = loader[ind]
     new_feats = [(feats.tolist()[i],feats.tolist()[i+1]) for i in range(0,len(feats.tolist()),2)]
