@@ -4,8 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="60475b18-b91a-4366-ae7a-6ce560f1c9d3" name="Changes" comment="loaderi kombinirani i uljepšani">
+    <list default="true" id="60475b18-b91a-4366-ae7a-6ce560f1c9d3" name="Changes" comment="Rapid classifier remade">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dataset_processor.py" beforeDir="false" afterPath="$PROJECT_DIR$/Dataset_processor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/general_loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/general_loader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plotting/image_processing_wrappers.py" beforeDir="false" afterPath="$PROJECT_DIR$/plotting/image_processing_wrappers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quality_control/skin_sampler.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/trainers/bbox_trainer.py" beforeDir="false" afterPath="$PROJECT_DIR$/trainers/bbox_trainer.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,14 +50,6 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/k/PycharmProjects/GREENSTEM-celeb&quot;
-  }
-}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\k\PycharmProjects\GREENSTEM-celeb\UI" />
@@ -59,14 +57,14 @@
       <recent name="C:\Users\k\PycharmProjects\GREENSTEM-celeb\testing" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\k\PycharmProjects\GREENSTEM-celeb\databases" />
       <recent name="C:\Users\k\PycharmProjects\GREENSTEM-celeb\Anno" />
       <recent name="C:\Users\k\PycharmProjects\GREENSTEM-celeb\bbox_component" />
       <recent name="C:\Users\k\PycharmProjects\GREENSTEM-celeb" />
       <recent name="C:\Users\k\PycharmProjects\GREENSTEM-celeb\quality_control" />
+      <recent name="C:\Users\k\PycharmProjects\GREENSTEM-celeb\quality_control\SkinLabels" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.general_loader">
+  <component name="RunManager" selected="Python.loader_quality_control_NEWEST">
     <configuration name="CelebADrawer" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="GREENSTEM-celeb" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -88,27 +86,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="general_loader" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="GREENSTEM-celeb" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="C:\Users\k\PycharmProjects\GREENSTEM-celeb\general_loader.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="loader" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="GREENSTEM-celeb" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -122,6 +99,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/UI/loader.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="loader_quality_control_NEWEST" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="GREENSTEM-celeb" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/loader_quality_control_NEWEST.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -174,7 +172,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.general_loader" />
+        <item itemvalue="Python.loader_quality_control_NEWEST" />
         <item itemvalue="Python.CelebADrawer" />
         <item itemvalue="Python.main" />
         <item itemvalue="Python.third_trainer" />
@@ -305,39 +303,13 @@
       <option name="presentableId" value="LOCAL−00019" />
       <updated>1686655185721</updated>
     </task>
-    <task id="LOCAL−00020" summary="loaderi kombinirani i uljepšani">
-      <created>1686691170100</created>
-      <option name="number" value="LOCAL−00020" />
-      <option name="presentableId" value="LOCAL−00020" />
-      <updated>1686691170100</updated>
-    </task>
-    <option name="localTasksCounter" value="21" />
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.csv" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
-    <option name="RECENT_FILTERS">
-      <map>
-        <entry key="Branch">
-          <value>
-            <list>
-              <RecentGroup>
-                <option name="FILTER_VALUES">
-                  <option value="origin/main" />
-                </option>
-              </RecentGroup>
-              <RecentGroup>
-                <option name="FILTER_VALUES">
-                  <option value="main" />
-                </option>
-              </RecentGroup>
-            </list>
-          </value>
-        </entry>
-      </map>
-    </option>
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
@@ -359,6 +331,27 @@
         </entry>
       </map>
     </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/main" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="main" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Pushed three prospective models, and supporting modules, incl. Evaluation stats for later use. (Ep. 9 is recommended for use based on testing)" />
@@ -366,8 +359,7 @@
     <MESSAGE value="-Finaliziran bbox_model te svi moduli vezani uz njega prebačeni u backup/legacy, složen README.md,&#10;-u plotting premješten CelebADrawer.py, dodan utility za crtanje featurea na slici, tj. licu &#10;-u future plotting dodan evaluator&#10;-finaliziran csv file sa reformatiranim locakijama značajki&#10; list_landmarks_resized_celeba.txt, te uklonjeno 2751 neispravnih slika nakon bbox-anja" />
     <MESSAGE value="finaliziran drugi model i jos jako puno toga" />
     <MESSAGE value="Rapid classifier remade" />
-    <MESSAGE value="loaderi kombinirani i uljepšani" />
-    <option name="LAST_COMMIT_MESSAGE" value="loaderi kombinirani i uljepšani" />
+    <option name="LAST_COMMIT_MESSAGE" value="Rapid classifier remade" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -376,6 +368,11 @@
           <url>file://$PROJECT_DIR$/bbox_component/ReFormatter.py</url>
           <line>40</line>
           <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/loader_quality_control_NEWEST.py</url>
+          <line>40</line>
+          <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

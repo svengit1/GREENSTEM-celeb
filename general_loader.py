@@ -58,9 +58,9 @@ def process(path, file):
     similarity_index = match[-2]
     inappropriate = match[-1]
 
-    return match_file, image_new, drawer.resize_bbox(bbox_dicts, default_model_input_size, img_size), \
-        drawer.reshape_feats(drawer.resize_feats(feats, default_model_input_size, img_size), bbox_dicts, img_size), \
-        similarity_index, inappropriate, \
-        age_dictionary[age], gender_dictionary[gender], race_dictionary[race]
+    new_bbox = drawer.resize_bbox(bbox_dicts, default_model_input_size, img_size)
+    feats_resized = drawer.resize_feats(feats, default_model_input_size, img_size)
+    feats_reshaped = drawer.reshape_feats(feats_resized, bbox_dicts, img_size)
 
-
+    return match_file, image_new, new_bbox, feats_resized, feats_reshaped, similarity_index, inappropriate, \
+           age_dictionary[age], gender_dictionary[gender], race_dictionary[race]

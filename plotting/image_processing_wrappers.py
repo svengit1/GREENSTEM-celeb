@@ -13,8 +13,10 @@ def generic_tensor_transform(image, new_size):
 def crop_image(image, bbox):
     return image.crop((bbox[0], bbox[1], bbox[0] + bbox[2], bbox[1] + bbox[3]))
 
+
 def result_wrap(tensor):
-    return tensor.tolist()[0] if tensor.shape != (1,1) else tensor.item()
+    return tensor.tolist()[0] if tensor.shape != (1, 1) else tensor.item()
+
 
 def argmax(list):
     for l in range(len(list)):

@@ -24,7 +24,6 @@ def bbox_transform(labels, image):
 class CelebADataset(CelebADatasetParent):
     pass
 
-
 image_dir = "../img_celeba"
 bbox_dir = "../Anno/existing/list_bbox_celeba.txt"
 dataset = CelebADataset(image_dir, bbox_dir, image_transform=transform, label_transform=bbox_transform,
