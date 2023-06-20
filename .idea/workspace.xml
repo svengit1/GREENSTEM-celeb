@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="60475b18-b91a-4366-ae7a-6ce560f1c9d3" name="Changes" comment="Rapid classifier remade">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dataset_processor.py" beforeDir="false" afterPath="$PROJECT_DIR$/Dataset_processor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general_loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/general_loader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plotting/image_processing_wrappers.py" beforeDir="false" afterPath="$PROJECT_DIR$/plotting/image_processing_wrappers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quality_control/skin_sampler.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/trainers/bbox_trainer.py" beforeDir="false" afterPath="$PROJECT_DIR$/trainers/bbox_trainer.py" afterDir="false" />
-    </list>
+    <list default="true" id="60475b18-b91a-4366-ae7a-6ce560f1c9d3" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -303,7 +295,14 @@
       <option name="presentableId" value="LOCAL−00019" />
       <updated>1686655185721</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Rapid classifier remade">
+      <created>1687188848883</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1687188848883</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="UnknownFeatures">
