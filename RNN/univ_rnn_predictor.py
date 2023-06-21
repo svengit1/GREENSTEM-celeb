@@ -18,7 +18,8 @@ chars_sorted_fcm = ['\n', ' ', '!', "'", '.', '0', '1', '2', '3', '4', '5', '6',
 
 def sample(model, starting_str,
            len_generated_text=500,
-           scale_factor=1.0):
+           randomness=1.0):
+    randomness = 1/randomness
     model_name = model
     if model == "tadjanovic":
         model = model_tadjanovic
@@ -53,7 +54,7 @@ def sample(model, starting_str,
             last_char.view(1), hidden, cell
         )
         logits = torch.squeeze(logits, 0)
-        scaled_logits = logits * scale_factor
+        scaled_logits = logits * randomness
         m = Categorical(logits=scaled_logits)
         last_char = m.sample()
         generated_str += str(char_array[last_char])
@@ -99,5 +100,5 @@ model_tadjanovic.eval()
 model_fcm = torch.load("FCM_LSTM_MODEL.pt")
 model_fcm.eval()
 
-text = sample("fcm","Živlenje o kak si mi rad!",1000,1)
+text = sample("fcm", "Živlenje o kak si mi rad!", 1000, 1)
 print(text)

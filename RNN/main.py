@@ -20,10 +20,10 @@ is_standby = False
 
 check_time = 2
 
-Login_info = {"host": 'petagimnazija.hr',
-              "database": 'petagimnazijahr_AI',
-              "user": 'petagimnazijahr_AI',
-              "password": 'AIpeta99%'}
+Login_info = {"host": '********',
+              "database": '********',
+              "user": '********',
+              "password": '********'}
 
 conn_src = connect(Login_info["host"],
                    Login_info["database"],
@@ -60,9 +60,8 @@ while True:
         print("fulfilling requests..")
         while len(RequestsForBot) > 0:
             A = RequestsForBot.deque()
-            #ovo bi trebalo dodati na site
             type = "tadjanovic"
-            Res = sample(type,A[2],len_generated_text=1000,scale_factor=1.0)
+            Res = sample(type, A[2], len_generated_text=1000, inverse_randomness=1.0)
             conn_curs_1.execute(f"UPDATE QA SET Answer = '{Res}', Done = 1 WHERE QAID = {A[0]}")
             conn_src.commit()
 
